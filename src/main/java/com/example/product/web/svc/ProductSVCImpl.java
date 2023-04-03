@@ -1,4 +1,4 @@
-package com.example.product.svc;
+package com.example.product.web.svc;
 
 
 import com.example.product.dao.Product;
@@ -35,6 +35,9 @@ public class ProductSVCImpl implements ProductSVC{
     return productDAO.delete(pid);
   }
 
+  public int deleteParts(List<Long> pids) {
+    return productDAO.deleteParts(pids);
+  }
   @Override
   public List<Product> findAll() {
     return productDAO.findAll();

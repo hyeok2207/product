@@ -1,4 +1,4 @@
-package com.example.product.svc;
+package com.example.product.web.svc;
 
 import com.example.product.dao.Product;
 
@@ -16,6 +16,12 @@ public interface ProductSVC {
   int delete(Long pid);
   //목록
   List<Product> findAll();
+  /**
+   * 부분삭제
+   * @param pids
+   * @return
+   */
+  int deleteParts(List<Long> pids);
   /**
    * 상품존재유무
    * @param pid 상품아이디

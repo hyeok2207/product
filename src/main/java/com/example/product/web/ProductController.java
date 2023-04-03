@@ -1,7 +1,7 @@
 package com.example.product.web;
 
 import com.example.product.dao.Product;
-import com.example.product.svc.ProductSVC;
+import com.example.product.web.svc.ProductSVC;
 import com.example.product.web.form.DetailForm;
 import com.example.product.web.form.SaveForm;
 import com.example.product.web.form.UpdateForm;
@@ -25,8 +25,6 @@ import java.util.Optional;
 public class ProductController {
 
   private final ProductSVC productSVC;
-
-
 
   //등록양식
   @GetMapping("/add")
@@ -84,8 +82,8 @@ public class ProductController {
     product.setQuantity(saveForm.getQuantity());
     product.setPrice(saveForm.getPrice());
 
-    Long savedpid = productSVC.save(product);
-    redirectAttributes.addAttribute("id",savedpid);
+    Long savedPid = productSVC.save(product);
+    redirectAttributes.addAttribute("id",savedPid);
     return "redirect:/products/{id}/detail";
   }
 
@@ -173,4 +171,15 @@ public class ProductController {
     return "product/all";
   }
 
+  //선택삭제
+  @PostMapping("/items/del")
+  public String deleteParts(@RequestParam("chk") List<Long> pids){
+    log.info("pids={}", pids);
+    if(pids.size() > 0) {
+      productSVC.deleteParts(pids);
+    }else {
+      return "product/all";
+    }
+    return "redirect:/products";
+  }
 }
